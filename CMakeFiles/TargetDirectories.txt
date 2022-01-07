@@ -1,5 +1,0 @@
-/home/somin/git/sominnn-examples/build-sominnn-examples-Qt_6_2_2_WebAssembly-Release/CMakeFiles/rebuild_cache.dir
-/home/somin/git/sominnn-examples/build-sominnn-examples-Qt_6_2_2_WebAssembly-Release/CMakeFiles/edit_cache.dir
-/home/somin/git/sominnn-examples/build-sominnn-examples-Qt_6_2_2_WebAssembly-Release/CMakeFiles/sominnn-examples.dir
-/home/somin/git/sominnn-examples/build-sominnn-examples-Qt_6_2_2_WebAssembly-Release/CMakeFiles/sominnn-examples_autogen_timestamp_deps.dir
-/home/somin/git/sominnn-examples/build-sominnn-examples-Qt_6_2_2_WebAssembly-Release/CMakeFiles/sominnn-examples_autogen.dir
