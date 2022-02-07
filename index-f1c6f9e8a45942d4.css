@@ -1,0 +1,58 @@
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.game {
+    border-radius: 10px;
+    background-color: #0aa;
+    display: flex;
+    justify-content: row;
+    padding: 0 5px;
+}
+
+.tile {
+    border-radius: 5px;
+    width: 120px;
+    height: 120px;
+    margin: 10px 5px;
+    background-color: #5cc;
+    line-height: 120px;
+    font-size: 60px;
+    font-family:"Calibri, sans-serif";
+    text-align: center;
+    vertical-align: middle;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.control-btn {
+    width: 120px;
+    height: 120px;
+    font-size: 40px;
+}
+
+.btn-holder-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.btn-holder-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
