@@ -11,13 +11,79 @@ const JSarrayOperationsTest = () => {
     const start = window.performance.now()
 
     let arr = [];
-    for (let i = 0; i < 1000000; ++i)
-        arr.push(Math.random());
+    for (let i = 0; i < 100000; ++i)
+        arr.push(Math.random())
 
     arr.sort()
 
-    const sum = arr.reduce((partialSum, a) => partialSum + a, 0);
+    const sum = arr.reduce((partialSum, a) => partialSum + a, 0)
 
     const end = window.performance.now()
     return end - start
+}
+
+const JSsameSortTest = () => {
+    const testSize = 100000
+    let arr = [];
+
+    for (let i = 0; i < testSize; ++i)
+        arr.push(Math.random());
+
+    const start = window.performance.now()
+
+    quickSortIterative(arr, 0, testSize - 1)
+
+    const sum = arr.reduce((partialSum, a) => partialSum + a, 0)
+
+    const end = window.performance.now()
+    return end - start
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+function swap(arr, i, j) {
+    const temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp;
+}
+
+function partition(arr, l, h)
+{
+    let x = arr[h]
+    let i = (l - 1)
+ 
+    for (let j = l; j <= h - 1; j++) {
+        if (arr[j] <= x) {
+            i++
+            swap(arr, i, j);
+        }
+    }
+    swap(arr, i + 1, h)
+    return (i + 1)
+}
+ 
+function quickSortIterative(arr, l, h)
+{
+    let stack = [/*h - l + 1*/]
+    let top = -1
+    
+    stack[++top] = l
+    stack[++top] = h
+    
+    while (top >= 0) {
+        h = stack[top--]
+        l = stack[top--]
+        
+        let p = partition(arr, l, h)
+        
+        if (p - 1 > l) {
+            stack[++top] = l
+            stack[++top] = p - 1
+        }
+        
+        if (p + 1 < h) {
+            stack[++top] = p + 1
+            stack[++top] = h
+        }
+    }
 }
