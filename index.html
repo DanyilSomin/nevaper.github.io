@@ -38,19 +38,19 @@
             if (cppFirst) {
                cppFirst = false
                document.querySelector("#cpp-md5").innerHTML = "CPP Holy Biblie MD5: " + CPP.md5Test()
-               document.querySelector("#cpp-array").innerHTML = "CPP array: " + CPP.arrayOperationsTest()
+               document.querySelector("#cpp-array").innerHTML = "CPP operations with array: " + CPP.arrayOperationsTest()
                document.querySelector("#cpp-same-sort").innerHTML = "CPP same sort: " + CPP.sameSortTest()
                document.querySelector("#js-md5").innerHTML = "JS Holy Biblie MD5: " + JSmd5Test()
-               document.querySelector("#js-array").innerHTML = "JS array: " + JSarrayOperationsTest()
+               document.querySelector("#js-array").innerHTML = "JS operations with array: " + JSarrayOperationsTest()
                document.querySelector("#js-same-sort").innerHTML = "JS same sort: " + JSsameSortTest()
             }
             else {
                cppFirst = true
                document.querySelector("#js-md5").innerHTML = "JS Holy Biblie MD5: " + JSmd5Test()
-               document.querySelector("#js-array").innerHTML = "JS array: " + JSarrayOperationsTest()
+               document.querySelector("#js-array").innerHTML = "JS operations with array: " + JSarrayOperationsTest()
                document.querySelector("#js-same-sort").innerHTML = "JS same sort: " + JSsameSortTest()
                document.querySelector("#cpp-md5").innerHTML = "CPP Holy Biblie MD5: " + CPP.md5Test()
-               document.querySelector("#cpp-array").innerHTML = "CPP array: " + CPP.arrayOperationsTest()
+               document.querySelector("#cpp-array").innerHTML = "CPP operations with array: " + CPP.arrayOperationsTest()
                document.querySelector("#cpp-same-sort").innerHTML = "CPP same sort: " + CPP.sameSortTest()
             }
 

@@ -8,10 +8,12 @@ const JSmd5Test = () => {
 }
 
 const JSarrayOperationsTest = () => {
+    const testSize = 200000
+
     const start = window.performance.now()
 
     let arr = [];
-    for (let i = 0; i < 100000; ++i)
+    for (let i = 0; i < testSize; ++i)
         arr.push(Math.random())
 
     arr.sort()
@@ -23,19 +25,16 @@ const JSarrayOperationsTest = () => {
 }
 
 const JSsameSortTest = () => {
-    const testSize = 100000
+    const testSize = 200000
     let arr = [];
 
     for (let i = 0; i < testSize; ++i)
         arr.push(Math.random());
 
     const start = window.performance.now()
-
     quickSortIterative(arr, 0, testSize - 1)
-
-    const sum = arr.reduce((partialSum, a) => partialSum + a, 0)
-
     const end = window.performance.now()
+
     return end - start
 }
 
