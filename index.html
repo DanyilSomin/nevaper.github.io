@@ -1,86 +1,50 @@
-<!doctype html> 
+<!doctype html>
 <html>
-   <head> 
-      <meta charset="utf-8">
-      <title>WebAssembly Benchmark</title>
-      <style>
-         div { 
-            font-size : 30px; text-align : center; color:orange; 
-         } 
-      </style>
-      <script src="binds.js"></script>
-      <script src="bible.js"></script>
-      <script src="tests.js"></script>
-   </head>
-   <body>
-      <button id="btn" onclick="updateBtnText()">0</button>
-      <p id="first"></p>
-      <p id="js-md5"></p>
-      <p id="cpp-md5"></p>
-      <p id="js-array"></p>
-      <p id="cpp-array"></p>
-      <p id="js-same-sort"></p>
-      <p id="cpp-same-sort"></p>
-      <script>
-         let CPP;
-         CppBenchmark().then((Module) => {
-            CPP = Module
-         });
-         
-         let cppFirst = false;
-         let it = 0;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+  <script src="bible.js"></script>
+  <script src="index.js"></script>
+  <script src="tests.js"></script>
 
-         function updateBtnText() {
-            document.querySelector("#btn").innerHTML = ++it;
+  <body>
+    <div id="start-page">
+      <h1 style="text-align: center;">JS/WASM benchmark</h1>
 
-            document.querySelector("#first").innerHTML = cppFirst ? "CPP first" : "JS first"
+      <p class="description">
+        &emsp;This is "js vs wasm" benchmark app. 
+        The main purpose is to collect statistics about WASM implementation performance comparing to JS implementation for different platforms.
+        This data can help developers to examine current state of WASM and make a decision use or not to use WASM.
+      </p>
 
-            if (cppFirst) {
-               cppFirst = false
-               document.querySelector("#cpp-md5").innerHTML = "CPP Holy Biblie MD5: " + CPP.md5Test()
-               document.querySelector("#cpp-array").innerHTML = "CPP operations with array: " + CPP.arrayOperationsTest()
-               document.querySelector("#cpp-same-sort").innerHTML = "CPP same sort: " + CPP.sameSortTest()
-               document.querySelector("#js-md5").innerHTML = "JS Holy Biblie MD5: " + JSmd5Test()
-               document.querySelector("#js-array").innerHTML = "JS operations with array: " + JSarrayOperationsTest()
-               document.querySelector("#js-same-sort").innerHTML = "JS same sort: " + JSsameSortTest()
-            }
-            else {
-               cppFirst = true
-               document.querySelector("#js-md5").innerHTML = "JS Holy Biblie MD5: " + JSmd5Test()
-               document.querySelector("#js-array").innerHTML = "JS operations with array: " + JSarrayOperationsTest()
-               document.querySelector("#js-same-sort").innerHTML = "JS same sort: " + JSsameSortTest()
-               document.querySelector("#cpp-md5").innerHTML = "CPP Holy Biblie MD5: " + CPP.md5Test()
-               document.querySelector("#cpp-array").innerHTML = "CPP operations with array: " + CPP.arrayOperationsTest()
-               document.querySelector("#cpp-same-sort").innerHTML = "CPP same sort: " + CPP.sameSortTest()
-            }
+      <button type="button" id="start-btn" class="btn btn-primary btn-lg">Start</button>
 
+      <div id="js-progress-container" style="margin-bottom: 20px; margin-top: 0; display: none;"> 
+        <h2 style="margin-bottom: 0px">Testing JS</h2>
+        <div class="progress" id="js-progress-border">
+          <div class="progress-bar progress-bar-striped bg-warning"
+               role="progressbar" style="width: 100%" id="js-progress">
+          </div>
+        </div>
+      </div>
 
-            //console.log(CPP.arrayOperationsTest());
+      <div id="wasm-progress-container" style="margin-bottom: 60px; display: none;">
+        <h2 style="margin-bottom: 0px">Testing WASM</h2>
+        <div class="progress" id="wasm-progress-border">
+          <div class="progress-bar progress-bar-striped"
+               role="progressbar" style="width: 100%" id="wasm-progress">
+          </div>
+        </div>
+      </div>
 
-            
+      <div id="results-container" style="display: none;">
+        <div><p id="js-mark-text" style="color: rgb(255, 200, 0);">JS result: 25</p></div>
+        <div><p id="wasm-mark-text" style="color: rgb(0, 170, 255);">WASM result: 26</p></div>
+      </div>
 
-            // console.log(sum);
+      <button type="button" id="stats-btn" class="btn btn-primary btn-lg" style="display: none;">All results</button>
+    </div>
 
-            // let str = ""
-
-            // for (let i = 0; i < 10000; ++i)
-            // {
-            //    const md5result = md5(str)
-            //    str += md5result[0]
-            // }
-
-            // for (let j = 0; j < 1000; ++j)
-            // {
-            //    const md5result = md5(str)
-            //    str = str.replaceAt(j % 1000, md5result[0])
-            // }
-
-            // console.log(str)
-
-
-            // console.log("CPP: " + CPP.md5Test())
-         }
-         
-      </script>
-   </body>
+    <script src="benchmark.js"></script>
+</body>
 </html>

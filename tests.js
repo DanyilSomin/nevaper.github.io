@@ -8,7 +8,7 @@ const JSmd5Test = () => {
 }
 
 const JSarrayOperationsTest = () => {
-    const testSize = 200000
+    const testSize = 30_000
 
     const start = window.performance.now()
 
@@ -24,65 +24,57 @@ const JSarrayOperationsTest = () => {
     return end - start
 }
 
-const JSsameSortTest = () => {
-    const testSize = 200000
-    let arr = [];
+const JSbubbleSort = () => {
+    const LEN = 30_000
+    let arr = []
+    for (let i = 0; i < LEN; ++i) {
+        arr[i] = Math.random()
+    }
 
-    for (let i = 0; i < testSize; ++i)
-        arr.push(Math.random());
+    const start = performance.now()
 
-    const start = window.performance.now()
-    quickSortIterative(arr, 0, testSize - 1)
-    const end = window.performance.now()
+    for (let i = 0; i < LEN; ++i) {
+        for (let j = i + 1; j < LEN; ++j) {
+            if (arr[j] < arr[j - 1]) {
+                const temp = arr[j]
+                arr[j] = arr[j - 1]
+                arr[j - 1] = temp
+            }
+        }
+    }
+
+    const end = performance.now()
 
     return end - start
 }
 
-//////////////////////////////////////////////////////////////////////////////////
+const JSfindPrimeTest = () => {
+    const start = performance.now();
 
-function swap(arr, i, j) {
-    const temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp;
-}
+    const LEN = 20_000
+    
+    let currentNumber = 0
+    let primesAmount = 0
+    while (primesAmount < LEN)
+    {
+        currentNumber += 1
 
-function partition(arr, l, h)
-{
-    let x = arr[h]
-    let i = (l - 1)
- 
-    for (let j = l; j <= h - 1; j++) {
-        if (arr[j] <= x) {
-            i++
-            swap(arr, i, j);
+        let prime = true
+        const searchUntil = currentNumber / 2 + 1
+        for (let i = 2; i < searchUntil; ++i)
+        {
+            if (currentNumber % i == 0)
+            {
+                prime = false
+                break
+            }
         }
+
+        if (prime)
+            primesAmount += 1
     }
-    swap(arr, i + 1, h)
-    return (i + 1)
-}
- 
-function quickSortIterative(arr, l, h)
-{
-    let stack = [/*h - l + 1*/]
-    let top = -1
-    
-    stack[++top] = l
-    stack[++top] = h
-    
-    while (top >= 0) {
-        h = stack[top--]
-        l = stack[top--]
-        
-        let p = partition(arr, l, h)
-        
-        if (p - 1 > l) {
-            stack[++top] = l
-            stack[++top] = p - 1
-        }
-        
-        if (p + 1 < h) {
-            stack[++top] = p + 1
-            stack[++top] = h
-        }
-    }
+
+    const end = performance.now()
+
+    return end - start
 }
