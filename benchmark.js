@@ -31,7 +31,7 @@ startBtn.addEventListener('click', async () => {
 
     let jsTime = 0
     for (let i = 0; i < jsTests.length; ++i) {
-        jsTime += jsTests[i]()
+        await (jsTime += jsTests[i]())
         jsProgress.style.width = ((i + 1) / jsTests.length * 100) + '%'
 
         await waitForUpdate()
@@ -46,7 +46,7 @@ startBtn.addEventListener('click', async () => {
 
     let wasmTime = 0
     for (let i = 0; i < wasmTests.length; ++i) {
-        wasmTime += wasmTests[i]()
+        await (wasmTime += wasmTests[i]())
         wasmProgress.style.width = ((i + 1) / wasmTests.length * 100) + '%'
 
         await waitForUpdate()
