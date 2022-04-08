@@ -61,7 +61,10 @@ startBtn.addEventListener('click', async () => {
     wasmProgress.style.transition.width = "0"
     
     const jsTime = await doJSTest()
-    const wasmTime = await doWASMTest()
+    let wasmTime
+    if (jsTime !== -1)
+        wasmTime = await doWASMTest()
+    else wasmTime = 22
 
     jsProgressContainer.style.display = "none"
     wasmProgressContainer.style.display = "none"
