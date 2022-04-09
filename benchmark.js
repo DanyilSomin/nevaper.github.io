@@ -24,7 +24,7 @@ const doJSTest = async () => {
 
         let jsTime = 0
         for (let i = 0; i < jsTests.length; ++i) {
-            await (jsTime += jsTests[i]())
+            jsTime += jsTests[i]()
             jsProgress.style.width = ((i + 1) / jsTests.length * 100) + '%'
 
             await waitForUpdate()
@@ -36,14 +36,17 @@ const doJSTest = async () => {
 }
 
 const doWASMTest = async () => {
+    await new Promise(r => setTimeout(r, 1000));
+
     const wasmTests = [ WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest, WASM.md5Test,
         WASM.md5Test, WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest,
         WASM.findPrimeTest, WASM.md5Test, WASM.arrayOperationsTest, WASM.bubbleSortTest,
         WASM.bubbleSortTest, WASM.findPrimeTest, WASM.md5Test, WASM.arrayOperationsTest ]
 
     let wasmTime = 0
+    console.log(wasmTime)
     for (let i = 0; i < wasmTests.length; ++i) {
-        await (wasmTime += wasmTests[i]())
+        wasmTime += wasmTests[i]()
         wasmProgress.style.width = ((i + 1) / wasmTests.length * 100) + '%'
 
         await waitForUpdate()
@@ -60,16 +63,14 @@ startBtn.addEventListener('click', async () => {
     wasmProgress.style.width = "1%"
     wasmProgress.style.transition.width = "0"
     
-    const jsTime = await doJSTest()
-    let wasmTime
-    if (jsTime !== -1)
-        wasmTime = await doWASMTest()
-    else wasmTime = 22
+    doJSTest().then((jsTime) => {
+        doWASMTest().then((wasmTime) => {
+            jsProgressContainer.style.display = "none"
+            wasmProgressContainer.style.display = "none"
 
-    jsProgressContainer.style.display = "none"
-    wasmProgressContainer.style.display = "none"
-
-    resultsContainer.style.display = "flex"
-    jsMarkText.innerHTML = "Js: " + Math.round(jsTime)
-    wasmMarkText.innerHTML = "WASM: " + Math.round(wasmTime)
+            resultsContainer.style.display = "flex"
+            jsMarkText.innerHTML = "Js: " + Math.round(jsTime)
+            wasmMarkText.innerHTML = "WASM: " + Math.round(wasmTime)
+        })
+    })
 })
