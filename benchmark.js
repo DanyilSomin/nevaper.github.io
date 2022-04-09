@@ -36,7 +36,7 @@ const doJSTest = async () => {
 }
 
 const doWASMTest = async () => {
-    await new Promise(r => setTimeout(r, 1000));
+    // await new Promise(r => setTimeout(r, 1000));
 
     const wasmTests = [ WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest, WASM.md5Test,
         WASM.md5Test, WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest,
